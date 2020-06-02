@@ -36,7 +36,7 @@ window.renderStatistics = function (ctx, players, times) {
 
   ctx.fillStyle = '#000';
   ctx.font = '16px PT Mono';
-  ctx.textBaseline = "hanging"
+  ctx.textBaseline = 'hanging';
   ctx.fillText('Ура вы победили!', CLOUD_X + GAP * 2, CLOUD_Y + GAP * 2);
   ctx.fillText('Список результатов:', CLOUD_X + GAP * 2, CLOUD_Y + GAP * 4);
 
@@ -44,7 +44,7 @@ window.renderStatistics = function (ctx, players, times) {
     if (players[i] == 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      function getRandomInt(max) {
+      var getRandomInt = function (max) {
         return Math.floor(Math.random() * Math.floor(max));
       }
       var colorColumn = 'hsl(' + 240 + ',' + (getRandomInt(100)) + '%,' + 50 + '% )';
