@@ -41,12 +41,12 @@ window.renderStatistics = function (ctx, players, times) {
   ctx.fillText('Список результатов:', CLOUD_X + GAP * 2, CLOUD_Y + GAP * 4);
 
   for (var i = 0; i < players.length; i++) {
-    if (players[i] == 'Вы') {
+    if (players[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
       var getRandomInt = function (max) {
         return Math.floor(Math.random() * Math.floor(max));
-      }
+      };
       var colorColumn = 'hsl(' + 240 + ',' + (getRandomInt(100)) + '%,' + 50 + '% )';
       ctx.fillStyle = colorColumn;
     }
