@@ -6,14 +6,17 @@ var CLOUD_X = 100;
 var CLOUD_Y = 10;
 var GAP = 10;
 var GAP_COLUMN = 40;
+var GAP_TEXT = 30;
 var BAR_HEIGHT = 150;
 var BAR_WIDTH = 50;
 
+// облако со статистикой
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
+// максимальный элемент
 var getMaxElement = function (arr) {
   var maxElement = arr[0];
 
@@ -22,10 +25,23 @@ var getMaxElement = function (arr) {
       maxElement = arr[i];
     }
   }
-
   return maxElement;
 };
 
+// случайное число для цвета
+var getRandomInt = function (max) {
+  return Math.floor(Math.random() * Math.floor(max));
+};
+
+// отрисовка и расположение колонн с текстом
+var renderColumn = function (ctx, i, heightColumn, players, times) {
+  ctx.fillRect(CLOUD_X + GAP_COLUMN + (BAR_WIDTH + GAP_COLUMN) * i, CLOUD_Y + CLOUD_HEIGHT - GAP_COLUMN, BAR_WIDTH, heightColumn);
+  ctx.fillStyle = '#000';
+  ctx.fillText(players, CLOUD_X + GAP_COLUMN + (BAR_WIDTH + GAP_COLUMN) * i, CLOUD_Y + CLOUD_HEIGHT - GAP_TEXT);
+  ctx.fillText(Math.round(times), CLOUD_X + GAP_COLUMN + (BAR_WIDTH + GAP_COLUMN) * i, CLOUD_Y + CLOUD_HEIGHT - 60 + heightColumn);
+};
+
+// отрисовка всей статистики
 window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
@@ -44,17 +60,9 @@ window.renderStatistics = function (ctx, players, times) {
     if (players[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      var getRandomInt = function (max) {
-        return Math.floor(Math.random() * Math.floor(max));
-      };
-      var colorColumn = 'hsl(' + 240 + ',' + (getRandomInt(100)) + '%,' + 50 + '% )';
-      ctx.fillStyle = colorColumn;
+      ctx.fillStyle = 'hsl(' + 240 + ',' + (getRandomInt(100)) + '%,' + 50 + '% )';
     }
-    var dl = -(BAR_HEIGHT * times[i]) / maxTime;
-    ctx.fillRect(CLOUD_X + GAP_COLUMN + (BAR_WIDTH + GAP_COLUMN) * i, CLOUD_Y + CLOUD_HEIGHT - GAP * 4, BAR_WIDTH, dl);
-    ctx.fillStyle = '#000';
-    ctx.fillText(players[i], CLOUD_X + GAP_COLUMN + (BAR_WIDTH + GAP_COLUMN) * i, CLOUD_Y + CLOUD_HEIGHT - GAP * 3);
-    ctx.fillText(Math.round(times[i]), CLOUD_X + GAP_COLUMN + (BAR_WIDTH + GAP_COLUMN) * i, CLOUD_Y + CLOUD_HEIGHT - 60 + dl);
+    var heightColumn = -(BAR_HEIGHT * times[i]) / maxTime;
+    renderColumn(ctx, i, heightColumn, players[i], times[i]);
   }
-
 };
