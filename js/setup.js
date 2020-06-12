@@ -44,6 +44,7 @@ var fillingPersones = function (wizard) {
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
   wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
   setupSimilarList.appendChild(wizardElement);
+  console.log(setupSimilarList)
 };
 
 for (var i = 0; i < persones.length; i++) {
