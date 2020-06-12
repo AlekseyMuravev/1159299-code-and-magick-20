@@ -60,6 +60,7 @@ var onPopupEscPress = function (evt) {
   }
 };
 
+// открытие попапа
 var openPopup = function () {
   setup.classList.remove('hidden');
 
@@ -75,6 +76,7 @@ var openPopup = function () {
   });
 };
 
+// закрытие попапа
 var closePopup = function () {
   setup.classList.add('hidden');
 
@@ -113,15 +115,14 @@ var inputFireball = setupFireballWrap.querySelector('input[name=fireball-color]'
 
 // функция подбора цвета мага
 var colorWizard = function (name, value, massive) {
-  name.style.fill = EYES_COLOR[Math.round(getRandomArbitrary(0, COAT_COLOR.length - 1))];
-  value.value = massive[Math.round(getRandomArbitrary(0, COAT_COLOR.length - 1))];
+  name.style.fill = massive[Math.round(getRandomArbitrary(0, massive.length - 1))];
+  value.value = massive[Math.round(getRandomArbitrary(0, massive.length - 1))];
 };
 
 // функция подбора цвета файербола
 var colorFireball = function (name, value, massive) {
-
-  name.style.background = massive[Math.round(getRandomArbitrary(0, COAT_COLOR.length - 1))];
-  value.value = massive[Math.round(getRandomArbitrary(0, COAT_COLOR.length - 1))];
+  name.style.background = massive[Math.round(getRandomArbitrary(0, massive.length - 1))];
+  value.value = massive[Math.round(getRandomArbitrary(0, massive.length - 1))];
 };
 
 
